@@ -50,37 +50,43 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter((Converter<String, Pet>) s -> {
-            if(!StringUtils.isEmpty(s)){
-                Pet pet = new Pet();
-                String[] split = s.split(",");
-                pet.setName(split[0]);
-                pet.setWeight(Double.parseDouble(split[1]));
-                pet.setAge(Integer.parseInt(split[2]));
-                return pet;
-            }
-            return null;
-        });
-        registry.addConverter((Converter<String, People>) s -> {
-            if(!StringUtils.isEmpty(s)){
-                People people = new People();
-                String[] split = s.split(",");
-                people.setName(split[0]);
-                people.setAge(Integer.parseInt(split[1]));
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                try{
-                    people.setBirth(format.parse(split[2]));
-                }catch (Exception e){
-                    people.setBirth(null);
+        registry.addConverter(new Converter<String, Pet>() {
+            @Override
+            public Pet convert(String s) {
+                if(!StringUtils.isEmpty(s)){
+                    Pet pet = new Pet();
+                    String[] split = s.split(",");
+                    pet.setName(split[0]);
+                    pet.setWeight(Double.parseDouble(split[1]));
+                    pet.setAge(Integer.parseInt(split[2]));
+                    return pet;
                 }
-                Pet pet = new Pet();
-                pet.setName(split[3]);
-                pet.setWeight(Double.parseDouble(split[4]));
-                pet.setAge(Integer.parseInt(split[5]));
-                people.setPet(pet);
-                return people;
+                return null;
             }
-            return null;
+        });
+        registry.addConverter(new Converter<String, People>() {
+            @Override
+            public People convert(String s) {
+                if(!StringUtils.isEmpty(s)){
+                    People people = new People();
+                    String[] split = s.split(",");
+                    people.setName(split[0]);
+                    people.setAge(Integer.parseInt(split[1]));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                    try{
+                        people.setBirth(format.parse(split[2]));
+                    }catch (Exception e){
+                        people.setBirth(null);
+                    }
+                    Pet pet = new Pet();
+                    pet.setName(split[3]);
+                    pet.setWeight(Double.parseDouble(split[4]));
+                    pet.setAge(Integer.parseInt(split[5]));
+                    people.setPet(pet);
+                    return people;
+                }
+                return null;
+            }
         });
     }
 }
