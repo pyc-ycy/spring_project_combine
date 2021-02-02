@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Welcome</h1>
+<h2>测试REST风格</h2>
+<form action="/user" method="get">
+    <input value="REST-GET 提交" type="submit">
+</form>
+<form action="/user" method="post">
+    <input value="REST-POST 提交" type="submit">
+</form>
+<form action="/user" method="post">
+    <input name="_method" type="hidden" value="DELETE">
+    <input value="REST-DELETE 提交" type="submit">
+</form>
+<form action="/user" method="post">
+    <input name="_method" type="hidden" value="PUT">
+    <input value="REST-PUT 提交" type="submit">
+</form>
+<h2><a href="/car/4/owner/PYC?age=22&inters=coding&inters=reading">测试链接</a></h2>
+<h2><a href="/cars/sell;low=34;brand=byd,audi,yd">测试链接2</a> </h2>
+<h2><a href="/boss/1;age=20/2;age=10">测试链接3</a> </h2>
+<h2>自定数据对象参数测试</h2>
+<form action="/savePeople" method="post">
+    <label>姓名：<input name="name" value="张三"></label><br>
+    <label>年龄：<input name="age" value="22"></label><br>
+    <label>生日：<input name="birth" value="2020/12/10"></label><br>
+    <label>宠物姓名：<input name="pet.name" value="Tom"></label><br>
+    <label>宠物体重：<input name="pet.weight" value="6.5"></label><br>
+    <label>宠物年龄：<input name="pet.age" value="2"></label><br>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
