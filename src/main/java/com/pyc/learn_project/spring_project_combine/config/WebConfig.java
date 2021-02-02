@@ -1,9 +1,16 @@
 package com.pyc.learn_project.spring_project_combine.config;
 
+import com.pyc.learn_project.spring_project_combine.domain.People;
+import com.pyc.learn_project.spring_project_combine.domain.Pet;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.UrlPathHelper;
+
+import java.text.SimpleDateFormat;
 
 /**
  * @author 御承扬
@@ -39,5 +46,41 @@ public class WebConfig implements WebMvcConfigurer {
         UrlPathHelper urlPathHelper = new UrlPathHelper();
         urlPathHelper.setRemoveSemicolonContent(false);
         configurer.setUrlPathHelper(urlPathHelper);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter((Converter<String, Pet>) s -> {
+            if(!StringUtils.isEmpty(s)){
+                Pet pet = new Pet();
+                String[] split = s.split(",");
+                pet.setName(split[0]);
+                pet.setWeight(Double.parseDouble(split[1]));
+                pet.setAge(Integer.parseInt(split[2]));
+                return pet;
+            }
+            return null;
+        });
+        registry.addConverter((Converter<String, People>) s -> {
+            if(!StringUtils.isEmpty(s)){
+                People people = new People();
+                String[] split = s.split(",");
+                people.setName(split[0]);
+                people.setAge(Integer.parseInt(split[1]));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                try{
+                    people.setBirth(format.parse(split[2]));
+                }catch (Exception e){
+                    people.setBirth(null);
+                }
+                Pet pet = new Pet();
+                pet.setName(split[3]);
+                pet.setWeight(Double.parseDouble(split[4]));
+                pet.setAge(Integer.parseInt(split[5]));
+                people.setPet(pet);
+                return people;
+            }
+            return null;
+        });
     }
 }

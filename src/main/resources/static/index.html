@@ -29,10 +29,15 @@
     <label>姓名：<input name="name" value="张三"></label><br>
     <label>年龄：<input name="age" value="22"></label><br>
     <label>生日：<input name="birth" value="2020/12/10"></label><br>
-    <label>宠物姓名：<input name="pet.name" value="Tom"></label><br>
+    <!--<label>宠物姓名：<input name="pet.name" value="Tom"></label><br>
     <label>宠物体重：<input name="pet.weight" value="6.5"></label><br>
-    <label>宠物年龄：<input name="pet.age" value="2"></label><br>
+    <label>宠物年龄：<input name="pet.age" value="2"></label><br>-->
+    <label>宠物：<input name="pet" value="Tom,2.5,1"></label><br>
     <input type="submit" value="Save">
+</form>
+<form action="/savePeople" method="post">
+    <label>人物数据：<input name="people" value="张三,22,2020/12/10,Tom,6.5,2"></label>
+    <input type="submit" value="提交">
 </form>
 </body>
 </html>
