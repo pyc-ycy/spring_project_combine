@@ -17,6 +17,10 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
         <!--自定义配置提示依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

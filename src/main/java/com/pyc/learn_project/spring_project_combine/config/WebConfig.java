@@ -1,16 +1,19 @@
 package com.pyc.learn_project.spring_project_combine.config;
 
+import com.pyc.learn_project.spring_project_combine.converter.MyMessageConverter;
 import com.pyc.learn_project.spring_project_combine.domain.People;
 import com.pyc.learn_project.spring_project_combine.domain.Pet;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.UrlPathHelper;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * @author 御承扬
@@ -46,6 +49,11 @@ public class WebConfig implements WebMvcConfigurer {
         UrlPathHelper urlPathHelper = new UrlPathHelper();
         urlPathHelper.setRemoveSemicolonContent(false);
         configurer.setUrlPathHelper(urlPathHelper);
+    }
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new MyMessageConverter());
     }
 
     @Override

@@ -28,6 +28,8 @@ person:
 
 spring:
   mvc:
+    contentnegotiation:
+      favor-parameter: true  #开启请求参数内容协商模式，使用请求URL？format=格式，如json，xml
     #static-path-pattern: /res/**
     hiddenmethod:
       filter:
@@ -35,3 +37,5 @@ spring:
   resources:
     cache:
       period: 1100
+server:
+  port: 8080
